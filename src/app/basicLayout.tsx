@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -18,8 +19,8 @@ export default function BasicLayout({ children }: Props) {
           <div className="flex items-center max-w-full">
             <Link href="/">
               <span className="flex items-center no-underline">
-                <img
-                  src={process.env.NEXT_PUBLIC_AVATAR}
+                <Image
+                  src={process.env.NEXT_PUBLIC_AVATAR as string}
                   alt=""
                   className="h-10 w-10 md:h-12 md:w-12 lg:h-20 lg:w-20 rounded-full"
                 />
