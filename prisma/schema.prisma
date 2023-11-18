@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // provider = "postgresql"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// User 模型的定义
+model User {
+  id          String     @id @default(uuid())
+  name        String
+  email       String     @unique
+  password    String
+  posts       Post[]
+  comments    Comment[]
+  TodoList    TodoList[]
+  createdTime DateTime   @default(now()) @map("created_time")
+  updatedTime DateTime   @updatedAt @map("updated_time")
+
+  @@map("user")
+}
+
+model Post {
+  id          String    @id @default(uuid())
+  published   Boolean   @default(false)
+  title       String
+  author      User?     @relation(fields: [authorId], onDelete: Cascade, references: [id])
+  authorId    String?   @map("author_id")
+  comments    Comment[]
+  createdTime DateTime  @default(now()) @map("created_time")
+  updatedTime DateTime  @updatedAt @map("updated_time")
+
+  @@map("post")
+}
+
+model Comment {
+  id          String   @id @default(cuid())
+  contain     String
+  post        Post     @relation(fields: [postId], onDelete: Cascade, references: [id])
+  postId      String   @map("post_id")
+  author      User?    @relation(fields: [authorId], onDelete: SetNull, references: [id])
+  authorId    String?  @map("author_id")
+  createdTime DateTime @default(now()) @map("created_time")
+  updatedTime DateTime @updatedAt @map("updated_time")
+
+  @@map("comment")
+}
+
+model TodoList {
+  id       Int     @id @default(autoincrement())
+  userId   String  @map("user_id")
+  user     User    @relation(fields: [userId], references: [id])
+  content  String
+  complete Boolean @default(false)
+
+  @@map("todoList")
+}

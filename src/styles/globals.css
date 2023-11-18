@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.locket {
+  width: 275px;
+  height: 400px;
+  background-image: url(./locket.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@keyframes spin {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+.flames {
+  width: 47px;
+  height: 133px;
+  background-image: url(./flames.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 122px;
+  top: 318px;
+  z-index: -1;
+  animation: spin 0.3s ease-in infinite;
+}
