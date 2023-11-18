@@ -2,12 +2,13 @@
 
 // 客户端组件中的获取身份信息
 
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import BasicLayout from './basicLayout';
 
 type Props = {
   children?: React.ReactNode;
-  session?: any;
+  session?: Session;
 };
 
 export const NextAuthProvider = ({

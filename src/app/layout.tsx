@@ -7,7 +7,8 @@ import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { NextAuthProvider } from './providers';
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from "@/utils/authOptions";
+import { Session } from 'next-auth';
 import { getServerSession } from 'next-auth/next';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions) as Session;
   return (
     <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
