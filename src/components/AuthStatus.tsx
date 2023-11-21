@@ -1,4 +1,4 @@
-import { authOptions } from "@/utils/authOptions";
+import { authOptions } from '@/utils/authOptions';
 import { getServerSession } from 'next-auth/next';
 
 export default async function AuthStatus() {
